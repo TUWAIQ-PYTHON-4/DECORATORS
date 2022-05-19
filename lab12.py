@@ -1,19 +1,19 @@
 
 def decorator_function(func):
-    def wrapper(*args, **kwargs):
-        result = func(*args, **kwargs)
-        return result
-    return wrapper
+    def check(*args, **kwargs):
+        if type(*args) != str or len(*args) < 5:
+            raise Exception("the argument should be str and it should have more than 5 characters")
+        else:
+            return func(*args)
 
+    return check
+            
 @decorator_function
-def is_str():
-    s=input()
-    if type(s) != str or len(s)<5 :
-        raise Exception("the argument should be str and it should have more than 5 characters")
-    
+def is_str(s):
+    print("doing operation")
 
 try:
- decorated_function = decorator_function(is_str)
- decorated_function()
+    s=input()
+    is_str(s)
 except Exception as ve:
     print(ve)
